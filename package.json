@@ -1,0 +1,22 @@
+{
+  "name": "nearley-harlowe",
+  "version": "1.0.0",
+  "description": "parse Twinery language",
+  "main": "parser.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jnicho02/nearley-harlowe.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jnicho02/nearley-harlowe/issues"
+  },
+  "homepage": "https://github.com/jnicho02/nearley-harlowe#readme",
+  "dependencies": {
+    "nearley": "^2.13.0"
+  }
+}
