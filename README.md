@@ -3,17 +3,17 @@ use the Harlowe grammar.
 
 Syntax is structured:
 
-h2 Variables
-
-Variables are created and set to a number, string, or boolean
+Variables
+=========
+Variables are created and set to a number
 ```
 (set: $score to 0)
 ```
-
+a string
 ```
 (set: $name to “Josephine”)
 ```
-
+or a boolean
 ```
 (set: $mercutioDead to false)
 ```
