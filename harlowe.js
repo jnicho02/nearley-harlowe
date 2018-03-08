@@ -11,7 +11,7 @@ var grammar = {
     {"name": "passage$ebnf$1$subexpression$1", "symbols": ["link"]},
     {"name": "passage$ebnf$1$subexpression$1", "symbols": ["code"]},
     {"name": "passage$ebnf$1", "symbols": ["passage$ebnf$1", "passage$ebnf$1$subexpression$1"], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
-    {"name": "passage", "symbols": ["passage$ebnf$1"]},
+    {"name": "passage", "symbols": ["passage$ebnf$1"], "postprocess": d => d[0].join("")},
     {"name": "words", "symbols": [/[\w\s."'^\(\)\[\]]/]},
     {"name": "link$string$1", "symbols": [{"literal":"["}, {"literal":"["}], "postprocess": function joiner(d) {return d.join('');}},
     {"name": "link$ebnf$1", "symbols": [/[\w\s]/]},

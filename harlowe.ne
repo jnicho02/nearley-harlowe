@@ -1,5 +1,5 @@
 main -> passage
-passage -> (words | link | code ):*
+passage -> (words | link | code ):* {% d => d[0].join("") %}
 
 words -> [\w\s."'^\(\)\[\]]
 link -> "[[" [\w\s]:+ "|" [\w\s]:+ "]]" {% d => {return {link:d[1].join(""), to:d[3].join("")} } %}
