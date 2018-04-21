@@ -1,21 +1,67 @@
 main -> passage
-passage -> (words | link | code ):* {% d => d[0].join("") %}
+passage -> (narrative | link | code)
 
-words -> [\w\s."'^\(\)\[\]]
-link -> "[[" [\w\s]:+ "|" [\w\s]:+ "]]" {% d => {return {link:d[1].join(""), to:d[3].join("")} } %}
-code ->  set | if | ifnot | else
+# You are in a darkened room. Something says, "Boo!".
+narrative -> [\w\s."'^\(\)\[\]]:+ {% function(d) { return d[0].join("") } %}
+# [[go somewhere]]
+# [[display text->go somewhere]]
+link -> "[[" [\w\s]:+ "|" [\w\s]:+ "]]" {%
+  function(d) {
+    return {
+      from: d[1].join(""),
+      to: d[3].join("")
+    }
+  }
+%}
+code ->  assignment #| if | else
 
-set -> "(set: " variable " to " (boolean | value) ")" {% d => {return {set:d[1], to:d[3]} } %}
-if -> "(if: " variable ")[" passage "]" {% d => {return {if:d[1], then:d[3]} } %}
-ifnot -> "(if: !" variable ")[" passage "]" {% d => {return {ifnot:d[1], then:d[3]} } %}
-else -> "(else:)[" passage "]" {% d => {return {else:d[1]} } %}
+# (set: $known to true)
+# (set: $score to 0)
+# (set: $name to “Josephine”)
+assignment -> "(set: " variable " to " (boolean | value) ")" {%
+  function(d) {
+    return {
+      set: d[1],
+      to: d[3]
+    }
+  }
+%}
+# (if: $known)[I know you!]
+# (if: $known is true)[I know you!]
+if -> "(if: " variable ")[" passage "]" {%
+  function(d) {
+    return {
+      if: d[1],
+      then: d[3]
+    }
+  }
+%}
+else -> "(else:)[" passage "]" {%
+  function(d) {
+    return {
+      else:d[1]
+    }
+  }
+%}
 
-variable -> "$" [\w]:+ {% d => d[1].join("") %}
-boolean -> [true|false]:+ {% d => {return {type:'boolean', v:d[0].join("")}} %}
-value -> "'" [\w]:+ "'" {% d => {return {type:'value', v:d[1].join("")}} %}
-
-# clickable -> "[" [\w\s]:+ "]<" subroutine "|" {% d => {return {link:d[1].join(""), run:d[3]} } %}
-# clickreplace -> "(click-replace: ?pickup)[" passage "]" {% id %}
-# subroutine -> [\w\s]:+ {% d => {return {type:'subroutine', v:d[0].join("")}} %}
+variable -> "$" [\w]:+ {%
+  function(d) {
+    return d[1].join("")
+  }
+%}
+boolean -> [true|false]:+ {%
+  function(d) {
+    return {
+      type:'boolean', v:d[0].join("")
+    }
+  }
+%}
+value -> "'" [\w]:+ "'" {%
+  function(d) {
+    return {
+      type:'value', v:d[1].join("")
+    }
+  }
+%}
 
 _ -> [\s\n]:* {% id %}
