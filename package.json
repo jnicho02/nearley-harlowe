@@ -1,22 +1,27 @@
 {
   "name": "nearley-harlowe",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "parse Twinery language",
   "main": "parser.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha tests/**.spec.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jnicho02/nearley-harlowe.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Jez Nicholson",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/jnicho02/nearley-harlowe/issues"
   },
   "homepage": "https://github.com/jnicho02/nearley-harlowe#readme",
   "dependencies": {
     "nearley": "^2.13.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.1.1",
+    "shelljs": "^0.8.1"
   }
 }

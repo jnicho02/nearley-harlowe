@@ -96,7 +96,6 @@ Trying it out
 * install node
 * use nvm
 * check that you are using node v6.10
-* chmod +x compile_and_test.sh
-* ./compile_and_test.sh
+* npm test
 
 EBNF
