@@ -68,4 +68,18 @@ describe('Harlowe parser', function() {
       expect(parser.results[0][0][0][0][0].set).to.eq('foo')
     })
   })
+
+  describe('fed with words and a link', function() {
+    before(function() {
+      parser = new nearley.Parser(nearley.Grammar.fromCompiled(grammar))
+      parser.feed('A dark room [[display text|goes_somewhere]]')
+      console.log(JSON.stringify(parser.results[0]))
+    })
+    it('should be unambiguous', function() {
+      expect(parser.results.length).to.eq(1)
+    })
+    it('should have a single result', function() {
+      expect(parser.results[0].length).to.eq(1)
+    })
+  })
 })

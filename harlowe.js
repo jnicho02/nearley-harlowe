@@ -12,7 +12,11 @@ var grammar = {
     {"name": "passage", "symbols": ["passage$subexpression$1"]},
     {"name": "narrative$ebnf$1", "symbols": [/[\w\s."'^\(\)\[\]]/]},
     {"name": "narrative$ebnf$1", "symbols": ["narrative$ebnf$1", /[\w\s."'^\(\)\[\]]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
-    {"name": "narrative", "symbols": ["narrative$ebnf$1"], "postprocess": function(d) { return d[0].join("") }},
+    {"name": "narrative", "symbols": ["narrative$ebnf$1"], "postprocess": 
+        function(d) {
+          return d[0].join("")
+        }
+        },
     {"name": "link$string$1", "symbols": [{"literal":"["}, {"literal":"["}], "postprocess": function joiner(d) {return d.join('');}},
     {"name": "link$ebnf$1", "symbols": [/[\w\s]/]},
     {"name": "link$ebnf$1", "symbols": ["link$ebnf$1", /[\w\s]/], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},

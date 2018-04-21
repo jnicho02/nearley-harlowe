@@ -2,7 +2,11 @@ main -> passage
 passage -> (narrative | link | code)
 
 # You are in a darkened room. Something says, "Boo!".
-narrative -> [\w\s."'^\(\)\[\]]:+ {% function(d) { return d[0].join("") } %}
+narrative -> [\w\s."'^\(\)\[\]]:+ {%
+  function(d) {
+    return d[0].join("")
+  }
+%}
 # [[go somewhere]]
 # [[display text->go somewhere]]
 link -> "[[" [\w\s]:+ "|" [\w\s]:+ "]]" {%
@@ -36,6 +40,7 @@ if -> "(if: " variable ")[" passage "]" {%
     }
   }
 %}
+# (else:)[something else, perhaps with a [link] or (set: $code = true) in.]
 else -> "(else:)[" passage "]" {%
   function(d) {
     return {
@@ -44,6 +49,7 @@ else -> "(else:)[" passage "]" {%
   }
 %}
 
+# $foo
 variable -> "$" [\w]:+ {%
   function(d) {
     return d[1].join("")
